@@ -6,6 +6,29 @@
 #include <unistd.h>
 
 #define MAXLINE 1024
+int make_server_sockfd()
+{
+    return socket(AF_INET,SOCK_STREAM,0);
+}
+int bufferToServer(int server_sockfd, char* buf)
+{
+    read(0,buf,MAXLINE);
+    if(write(server_sockfd, buf, MAXLINE) <= 0)
+    {
+        perror("[ERROR] WRITE:");
+        return -1;
+    }
+
+}
+int serverToBuffer(int server_sockfd, char* buf)
+{
+    memset(buf,0x00,MAXLINE);
+    if(read(server_sockfd, buf, MAXLINE <= 0))
+    {
+        perror("[ERROR] READ:");
+        return -1;
+    }
+}
 int main(int argc, char **argv)
 {
     struct sockaddr_in serveraddr;
@@ -13,14 +36,14 @@ int main(int argc, char **argv)
     int client_len;
     char buf[MAXLINE];
 
-    server_sockfd = socket(AF_INET,SOCK_STREAM, 0);
+    server_sockfd = make_server_sockfd();
     if(-1 == server_sockfd)
     {
         perror("[ERROR] :");
         return -1;
     }
 
-    char addr[] = "127.0.01";
+    char addr[] = "127.0.0.1";
     int port = 3500;
     serveraddr.sin_family = AF_INET;
     serveraddr.sin_family = AF_INET;
@@ -37,18 +60,12 @@ int main(int argc, char **argv)
     }
 
     memset(buf,0x00,MAXLINE);
-    read(0,buf,MAXLINE);
-    if(write(server_sockfd, buf, MAXLINE) <= 0)
-    {
-        perror("[ERROR] WRITE:");
-        return -1;
-    }
+
+    if (-1 == bufferToServer(server_sockfd, buf)) return -1;
+
     memset(buf,0x00,MAXLINE);
-    if(read(server_sockfd, buf, MAXLINE <= 0))
-    {
-        perror("[ERROR] READ:");
-        return -1;
-    }
+    if (-1 == serverToBuffer(server_sockfd, buf)) return -1;
+
     close(server_sockfd);
     printf("read : %s",buf);
     return 0;
