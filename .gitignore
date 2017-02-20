@@ -8,5 +8,6 @@
 
 /Chapter4/echo_client
 /WinClients/Debug/*
-/WinClients/Debug/echo_server_win/&*
+/WinClients/Debug/echo_server_win/*
 /WinClients/WinClients/Debug/*
+/WinClients/.vs/*
