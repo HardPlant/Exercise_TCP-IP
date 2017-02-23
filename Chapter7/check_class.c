@@ -5,12 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../err.h"
+
 #define CLASS_MASK htonl(15<<4)
-int err(char* msg, int retn)
-{
-    fprintf(stderr, "%s",msg);
-    exit(retn);
-}
 
 int main(int argc, char *argv[])
 {
