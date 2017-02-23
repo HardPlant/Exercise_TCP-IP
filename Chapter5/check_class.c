@@ -23,8 +23,8 @@ int main(int argc, char *argv[])
     if(argc!=2) err("usage : [internet address]\n", 1);
 
     laddr = inet_addr(argv[1]);
-    if(laddr == INADDR_ANY) err("INADDR_ANY\n"),0;
-    else if(ladder == INADDR_NONE) err("INADDR_NONE"),0;
+    if(laddr == INADDR_ANY) err("INADDR_ANY\n",0);
+    else if(laddr == INADDR_NONE) err("INADDR_NONE",0);
 
     haddr = ntohl(laddr);
 
