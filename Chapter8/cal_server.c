@@ -9,7 +9,7 @@
 #include <sys/time.h>
 #include "../err.h"
 
-#define PORT 3600
+#define PORT 3500
 
 struct cal_data
 {
@@ -29,8 +29,17 @@ int main(int argc, char *argv[])
     int left_num, right_num;
     short int cal_result;
 
-    listen_sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    listen_sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if(listen_sockfd == -1) perr(err_one);
+
+    memset((void*)&sock_addr, 0x00, sizeof(sock_addr));
+    sock_addr.sin_family = AF_INET;
+    sock_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    sock_addr.sin_port = htons(PORT);
+
+    if(bind(listen_sockfd, (struct sockaddr*)&sock_addr,
+        sizeof(sock_addr)) == -1)
+        perr(err_one);
 
     if(listen(listen_sockfd,5) == -1) perr(err_one);
 
