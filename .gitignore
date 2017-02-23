@@ -5,9 +5,17 @@
 *.vcprojx
 *.sln
 *.vcxproj*
+*.tlog
+*.log
+*.obj
+*.pdb
+*.lastbuildstate
+*.suo
+unsuccessfulbuild
 
 /Chapter4/echo_client
 /WinClients/Debug/*
 /WinClients/Debug/echo_server_win/*
 /WinClients/WinClients/Debug/*
+/WinClients/ch7_inet_addr_win/Debug/*
 /WinClients/.vs/*
