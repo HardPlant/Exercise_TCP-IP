@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 #define PORT 3500
-#define IP "127.0.0.1"
+#define IP "192.168.59.128"
 
 int main()
 {
