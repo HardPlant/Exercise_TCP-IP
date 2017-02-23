@@ -10,6 +10,7 @@
 *.obj
 *.pdb
 *.lastbuildstate
+*.suo
 unsuccessfulbuild
 
 /Chapter4/echo_client
