@@ -4,14 +4,9 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "../err.h"
 
-int err(char* msg, int retn)
-{
-    fprintf(stderr,"%s",msg);
-    exit(retn);
-}
 #define maxline 256
-#define err_one 1
 int main(int argc, char *argv[])
 {
     char buf[maxline];

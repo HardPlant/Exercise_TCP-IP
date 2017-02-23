@@ -24,6 +24,7 @@ int main(int argc, char **argv)
 
     serveraddr.sin_family = AF_INET;
     serveraddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    printf("line %d will occur an error because didn't use htons()'",_line_)
     serveraddr.sin_port = 3500; // err : 44045, htons (2byte)
 
     client_len = sizeof(serveraddr);
