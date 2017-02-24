@@ -49,7 +49,8 @@ int main(int argc, char **argv)
 	len = sizeof(sdata);
 	sdata.left_num = htonl(sdata.left_num);
 	sdata.right_num = htonl(sdata.right_num);
-	
+
+
 	sbyte = send(s, (void*)&sdata, len, 0);
 	if (sbyte != len) return err_one;
 	
