@@ -20,3 +20,4 @@ unsuccessfulbuild
 /WinClients/WinClients/Debug/*
 /WinClients/ch7_inet_addr_win/Debug/*
 /WinClients/.vs/*
+/WinClinet/.vs/WinClients/*
