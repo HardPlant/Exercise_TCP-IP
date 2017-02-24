@@ -7,6 +7,7 @@
 #define err_badOperand 2
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int err(char* msg, int retn)
 {
