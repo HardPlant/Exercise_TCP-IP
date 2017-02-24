@@ -62,8 +62,8 @@ int main(int argc, char *argv[])
             (struct sockaddr*)&addr, addrlen);
         recvfrom(sockfd, (void*)&sdata, sizeof(sdata),0,
             (struct sockaddr*)&recvaddr, &addrlen);
-        
-        printf("%d %c %d = %d\n", ntohl(sdata.left_num), sdata.op,
+        if(ntohs(sdata.error) == err_badOperand) printf("Bad Operand..\n");
+        else printf("%d %c %d = %d\n", ntohl(sdata.left_num), sdata.op,
             ntohl(sdata.right_num), ntohl(sdata.result));
     }
     close(sockfd);
