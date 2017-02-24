@@ -23,7 +23,7 @@ struct cal_data{
 int main(int argc, char *argv[])
 {
     int sockfd;
-    socketlen_t addrlen;
+    socklen_t addrlen;
     int cal_result;
     int left_num, right_num;
     struct sockaddr_in addr, cliaddr;
@@ -44,8 +44,8 @@ int main(int argc, char *argv[])
 
     while(1)
     {
-        addrlen = sizof(cliaddr);
-        recvfrom(sockfd, (void*)&rdata, sizeof(rdata), NULL,
+        addrlen = sizeof(cliaddr);
+        recvfrom(sockfd, (void*)&rdata, sizeof(rdata), 0,
             (struct sockaddr *)&cliaddr, &addrlen);
     #if DEBUG
         printf("Client info : %s(%d)\n", inet_ntoa(cliaddr.sin_addr),
@@ -70,8 +70,8 @@ int main(int argc, char *argv[])
             rdata.error=htons(err_badOp);
     
     rdata.result=htonl(cal_result);
-    sendto(sockfd,(void*)&rdata,sizeof(rdata,NULL,
-        (struct sockaddr*)&cliaddr, &addrlen));
+    sendto(sockfd,(void*)&rdata,sizeof(rdata),0,
+        (struct sockaddr*)&cliaddr, addrlen);
     }
     return 1;
 }
