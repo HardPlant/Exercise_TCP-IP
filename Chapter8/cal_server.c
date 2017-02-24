@@ -43,7 +43,8 @@ int main(int argc, char *argv[])
 
     if(listen(listen_sockfd,5) == -1) perr(err_one);
 
-
+for(;;)
+{
     addr_len = sizeof(client_addr);
     client_sockfd = accept(listen_sockfd,
         (struct sockaddr*)&client_addr, &addr_len);
@@ -53,8 +54,8 @@ int main(int argc, char *argv[])
 
     rdata.error=0;
 
-    left_num = ntohs(rdata.left_num);
-    right_num = ntohs(rdata.right_num);
+    left_num = ntohl(rdata.left_num);
+    right_num = ntohl(rdata.right_num);
 
     if (rdata.op == '+')
         cal_result = left_num + right_num;
@@ -77,12 +78,11 @@ int main(int argc, char *argv[])
     {
         rdata.error=err_badOp;
     }
-
     rdata.result = htonl(cal_result);
-    rdata.error = htons(cal_result);
+    rdata.error = htons(rdata.error);
     write(client_sockfd, (void*)&rdata, sizeof(rdata));
     close(client_sockfd);
-    
+}
     close(listen_sockfd);
     return 0;
 } 

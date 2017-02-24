@@ -6,10 +6,17 @@
 #define err_badOp 1
 #define err_badOperand 2
 
+#include <stdio.h>
+
 int err(char* msg, int retn)
 {
     fprintf(stderr,"%s",msg);
     exit(retn);
 }
 
+void perr(int errcode)
+{
+    perror("[ERROR] ");
+    exit(errcode);
+}
 #endif
