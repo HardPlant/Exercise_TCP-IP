@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
     }
 
     rdata.result = htonl(cal_result);
-    rdata.error = htons(cal_result);
+    rdata.error = htons(rdata.error);
     write(client_sockfd, (void*)&rdata, sizeof(rdata));
     close(client_sockfd);
     
