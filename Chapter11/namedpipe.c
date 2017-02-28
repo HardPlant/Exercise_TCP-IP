@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
 
     printf("ReadOnly named pipe : /tmp/myfifo_r\n");
 
-    if(err_failed == mkfifo("/tmp") S_IRUSR|O_WRONLY) perr(err_one);
+    if(err_failed == mkfifo("/tmp/myfifo_w", S_IRUSR|O_WRONLY)) perr(err_one);
 
     printf("WriteOnly Named Pipe : /tmp/myfifo_w\n");
 
