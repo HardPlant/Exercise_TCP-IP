@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 
         printf("Read : %s", buf);
         write(wfd, buf, maxline);
-        lseek(wfd,0,SEEK_SET); // flush buffer
+        // lseek(wfd,0,SEEK_SET); // flush buffer
     }
     return 0;
 }
