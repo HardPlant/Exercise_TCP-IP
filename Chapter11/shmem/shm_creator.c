@@ -25,5 +25,9 @@ int main(int argc, char* argv[])
     }
 
     stmdt(shared_memory); // shmdt(vpShmaddr);
+    //int shmctl(int shmid, int cmd, struct shmid_ds *buf);
+    //cmd : [IPC_STAT| IPC_SET | IPC_RMID ]
+    //buf : for IPC_STAT, information saved in buf
+    
     return 0;
 }
