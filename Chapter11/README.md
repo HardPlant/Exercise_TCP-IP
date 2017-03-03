@@ -1,7 +1,7 @@
 ##Chapter 11 : IPC
 
 * pipe : anon / named
-* unix domain socket
+* unix domain socket // domain : INET, ... *UNIX*
 * shared memory
 * semaphore
 * signal
