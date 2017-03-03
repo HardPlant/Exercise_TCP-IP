@@ -10,7 +10,8 @@
 int main(int argc, char **argv)
 {
     int server_sockfd, client_sockfd;
-    int client_len, n;
+    socklen_t client_len;//not int
+    int n;
 
     char buf[MAXBUF];
 
@@ -51,6 +52,7 @@ int main(int argc, char **argv)
             perror("[ERROR] Write:");
             close(client_sockfd);
         }
+        printf("write:%s\n",buf);
         close(client_sockfd);
     }
     close(server_sockfd);
