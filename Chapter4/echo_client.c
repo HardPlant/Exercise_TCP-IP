@@ -22,7 +22,7 @@ int bufferToServer(int server_sockfd, char* buf)
 }
 int serverToBuffer(int server_sockfd, char* buf)
 {
-    memset(buf,0x00,MAXLINE);
+    read(server_sockfd,buf,MAXLINE);
     if(read(server_sockfd, buf, MAXLINE <= 0))
     {
         perror("[ERROR] READ:");
@@ -68,6 +68,6 @@ int main(int argc, char **argv)
     if (-1 == serverToBuffer(server_sockfd, buf)) return -1;
 
     close(server_sockfd);
-    printf("read : %s",buf);
+    printf("read : %s\n",buf);
     return 0;
 }
