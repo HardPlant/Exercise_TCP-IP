@@ -65,8 +65,7 @@ int main(int argc, char *argv[])
             }
             memset(buf,0x00,MAXLINE);
         }
-        
+        close(client_sockfd);
     }
-    close(client_sockfd);
     return 0;
 }
