@@ -12,12 +12,18 @@ int make_server_sockfd()
 }
 int bufferToServer(int server_sockfd, char* buf)
 {
+    static int i=1;
     read(0,buf,MAXLINE);
-    if(write(server_sockfd, buf, MAXLINE) <= 0)
+    if (i%3 == 0)
+    {
+        send(server_sockfd, buf,sizeof(buf), MSG_OOB);
+    }
+    else if (write(server_sockfd, buf, MAXLINE) <= 0)
     {
         perror("[ERROR] WRITE:");
         return -1;
     }
+    i++;
     return 0;
 }
 int serverToBuffer(int server_sockfd, char* buf)
@@ -47,7 +53,6 @@ int main(int argc, char **argv)
     char addr[] = "127.0.0.1";
     int port = 3500;
     serveraddr.sin_family = AF_INET;
-    serveraddr.sin_family = AF_INET;
     serveraddr.sin_addr.s_addr = inet_addr(addr);
     serveraddr.sin_port = htons(port);
 
@@ -59,15 +64,16 @@ int main(int argc, char **argv)
         perror("[ERROR] CONNECT:");
         return -1;
     }
-
+while(1)
+{
     memset(buf,0x00,MAXLINE);
-
     if (-1 == bufferToServer(server_sockfd, buf)) return -1;
 
     memset(buf,0x00,MAXLINE);
     if (-1 == serverToBuffer(server_sockfd, buf)) return -1;
 
-    close(server_sockfd);
     printf("read : %s",buf);
+}
+    close(server_sockfd);
     return 0;
 }
