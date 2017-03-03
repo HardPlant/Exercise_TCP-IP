@@ -6,26 +6,29 @@
 
 #include <unistd.h>
 #include <stdlib.h>
-#include "../err.h"
+
 #define MAXBUF 256
 
 int main(int argc, char *argv[])
 {
     int server_sockfd, client_sockfd;
     socklen_t client_len;
-    char buf[MAXBUF];
     struct sockaddr_in clientaddr, serveraddr;
     FILE *sock_fp = NULL;
+
+    char nickname[24];
+    char realname[24];
+    int age;
+    char message[256];
 
     client_len = sizeof(clientaddr);
 
     if((server_sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP))< 0)
-        perr(err_one);
-
+        return 1;
     memset((void*)&serveraddr, 0x00, sizeof(serveraddr));
     serveraddr.sin_family = AF_INET;
-    serveraddr.sin_addr.s_addr=htonl(INADDR_ANY);
-    serveraddr.sin_port =htons(atoi(argv[1]));
+    serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    serveraddr.sin_port = htons(atoi(argv[1]));
 
     bind(server_sockfd, (struct sockaddr*)&serveraddr, sizeof(serveraddr));
     listen(server_sockfd, 5);
@@ -37,20 +40,25 @@ int main(int argc, char *argv[])
         sock_fp = fdopen(client_sockfd, "r+");
         if(sock_fp == NULL) continue;
         while(1)
-        { // no need to memset();
-            if(fgets(buf, MAXBUF-1, sock_fp) == NULL) // instead of read()
+        {
+            fscanf(sock_fp,"%[^,],%[^,],%d,%[^\n]%*c", // *c is cat, read but not use
+                nickname, realname, &age, message);
+            if(feof(sock_fp)!=0 || ferror(sock_fp)!=0)
             {
                 printf("closing socket..\n");
                 fclose(sock_fp);
                 break;
             }
-            if(fputs(buf, sock_fp) == -1) // instead of write()
-            {
-                printf("closing socket..\n");
-                fclose(sock_fp);
-                break;
-            }
-        }
+            printf("nickname : %s\n", nickname);
+            printf("realname : %s\n", realname);
+            printf("age      : %d\n", age);
+            printf("message  : %s\n", message);
+
+            fprintf(sock_fp,
+            "name : %s\nmessage : %s\nbirth:%d\n"
+            , realname,message,2010-age);
+        } 
+        fclose(sock_fp);
     }
     return 1;
 }
