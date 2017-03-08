@@ -14,7 +14,7 @@ void *t_func(void *data) // increase count.
     while(1)
     {
         //*
-        tmp = count;
+        tmp = *count;
         count++; // will make problem
         sleep(1);
         *count = tmp;

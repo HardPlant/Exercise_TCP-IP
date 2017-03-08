@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-
+#include "../err.h"
 #define MAXLINE 1024
 #define PORTNUM 3600
 
@@ -22,12 +22,12 @@ void *thread_func(void *data)
     struct sockaddr_in client_addr;
     memset(buf, 0x00, MAXLINE);
     addrlen = sizeof(client_addr);
-    getpeername(sockfd, (struct scokaddr*)&client_addr, &addrlen);
+    getpeername(sockfd, (struct sockaddr*)&client_addr, &addrlen);
     while((readn = read(sockfd, buf, MAXLINE)) > 0)
     {
         printf("Read Data %s(%d) : %s"
             , inet_ntoa(client_addr.sin_addr)
-            , ntohs(client_addr, sin_port)
+            , ntohs(client_addr.sin_port)
             , buf);
         write(sockfd, buf, strlen(buf));
         memset(buf, 0x00, MAXLINE);
