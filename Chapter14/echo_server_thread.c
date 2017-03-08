@@ -13,7 +13,7 @@
 #define MAXLINE 1024
 #define PORTNUM 3600
 
-void *thread_func(void *data)
+void *thread_func(void *data) // get client_fd to data
 {// read data.
     int sockfd = *((int*)data);
     int readn;
@@ -40,8 +40,6 @@ int main(int argc, char *argv[])
 {
     int listen_fd, client_fd;
     socklen_t addrlen;
-    int readn;
-    char buf[MAXLINE];
     pthread_t thread_id;
 
     struct sockaddr_in server_addr, client_addr;
