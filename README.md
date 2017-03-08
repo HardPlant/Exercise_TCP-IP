@@ -47,3 +47,11 @@
 12. Chapter 12
 
   Advanced I/O Functions, I/O Control
+
+13. Chapter 13
+
+  Multiprocess I/O, with select(), FD_SET
+
+14. Chapter 14
+
+  Linux Multi Thread Socket Programming
