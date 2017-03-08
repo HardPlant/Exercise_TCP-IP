@@ -13,9 +13,16 @@ void *t_func(void *data) // increase count.
 
     while(1)
     {
+        //*
+        tmp = count;
+        count++; // will make problem
+        sleep(1);
+        *count = tmp;
         printf("%lu %d\n", thread_id, *count);
+        /*/
         *count = *count + 1;
         sleep(1);
+        */// have problem, because shared area will not be protected
     }
 }
 
