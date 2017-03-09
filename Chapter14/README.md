@@ -100,6 +100,24 @@ Linux Multithread Programming
   signal to condVar, awake one of waiter thread.
   we can't know which thread will awakes. broadcast() will awake all waiters.
 
+* MapReduce
+
+  a distributed process technology provided by Google. uses multithreading.
+
+* Pros of multithreading
+
+- Increased responsibility
+  not much resource to make a thread.
+- Efficient use of resources
+- Ease share of resources
+  threads run in single process, so resource shared.
+
+* Cons of multithreading
+
+- stability
+  an error can interrupt to other thread.
+- difficult to Programming
+  
   
 
 
