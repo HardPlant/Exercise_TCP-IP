@@ -1,13 +1,13 @@
 Linux Multithread Programming
 ====
 * Create Thread (POSIX thread)
-  > \#include <pthread.h>
-  > int pthread_create(pthread_t *thread, pthread_attr_t *attr,
-  >                      void* (*start_routine)(void*), void *arg);
-  > // thread : thread id
-  > // attr : property of thread, NULL to use default 
-  > // start_routine : function pointer
-  > // arg : function's argument
+    #include <pthread.h>
+    int pthread_create(pthread_t *thread, pthread_attr_t *attr,
+                          void* (*start_routine)(void*), void *arg);
+     // thread : thread id
+    // attr : property of thread, NULL to use default 
+    // start_routine : function pointer
+    // arg : function's argument
 
   fork() can be used without args, but thread is more complex.
   thread changes code with context, which mean function.
