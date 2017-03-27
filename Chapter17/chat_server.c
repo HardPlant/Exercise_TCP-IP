@@ -37,9 +37,9 @@ int main(int argc, char *argv[])
     if(err_failed == (epollfd = epoll_create(100)))
         return err_failed;
 
-    addrlen = sizoef(addr);
+    addrlen = sizeof(addr);
     if(err_failed ==
-        (listenfd = socket(AF)INET, SOCK_STREAM, 0))
+        (listenfd = socket(AF_INET, SOCK_STREAM, 0)))
         return err_failed;
 
     addr.sin_family = AF_INET;
@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
             else
             {//event occurs in clientfd->read data
                 user_data = events[i].data.ptr;
-                menset(buf, 0x00, MAXLINE);
+                memset(buf, 0x00, MAXLINE);
                 readn = read(user_data->fd, buf, MAXLINE);
                 if(readn <= 0)
                 {// disconnect event, remove user
