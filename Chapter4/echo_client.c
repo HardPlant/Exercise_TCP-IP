@@ -2,6 +2,7 @@
 #include <arpa/inet.h> // for socket support
 #include <sys/stat.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -30,6 +31,12 @@ int serverToBuffer(int server_sockfd, char* buf)
     }
     return 0;
 }
+int isargentered(char* argv)
+{
+    if(strcmp(argv,"\0") == 0) return 0;
+    else return 1;
+    
+}
 int main(int argc, char **argv)
 {
     struct sockaddr_in serveraddr;
@@ -45,7 +52,11 @@ int main(int argc, char **argv)
     }
 
     char addr[] = "127.0.0.1";
-    int port = 3500;
+    
+    int port;
+    if (isargentered(argv[1])) port = atoi(argv[1]);
+    else port = 3500;
+    printf("%d\n",port);
     serveraddr.sin_family = AF_INET;
     serveraddr.sin_family = AF_INET;
     serveraddr.sin_addr.s_addr = inet_addr(addr);
